@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+    <meta name="referrer" content="no-referrer">
+    <title>Rudraksha Jaap Mala Counter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #140a00, #2c1600);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(230, 126, 34, 0.12) 1px, transparent 0);
+            background-size: 24px 24px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            background: rgba(20, 10, 5, 0.95);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 20px rgba(211, 84, 0, 0.2);
+            border: 1px solid rgba(211, 84, 0, 0.3);
+            text-align: center;
+            width: 320px;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: #f39c12;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .mala-track {
+            position: relative;
+            height: 80px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(230, 126, 34, 0.2);
+        }
+
+        .mala-track::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e67e22;
+            z-index: 1;
+            box-shadow: 0 0 6px #ff9f43;
+        }
+
+        .mala-track::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #f1c40f;
+            z-index: 4;
+            box-shadow: 0 0 8px #f1c40f;
+        }
+
+        .beads-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .bead {
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle at 35% 35%, #d35400, #873600 45%, #3d1600 90%);
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.8), 2px 4px 6px rgba(0,0,0,0.6);
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .bead::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            background: repeating-radial-gradient(circle, transparent, transparent 3px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0.2) 5px);
+            opacity: 0.6;
+        }
+
+        .bead.active-bead {
+            transform: scale(1.15);
+            filter: brightness(1.25);
+            box-shadow: 0 0 15px rgba(230, 126, 34, 0.6), inset -2px -2px 6px rgba(0,0,0,0.8);
+        }
+
+        .bead.meru {
+            background: radial-gradient(circle at 35% 35%, #f1c40f, #d35400 60%, #5e1d00);
+            border: 1px solid #f39c12;
+            box-shadow: 0 0 12px rgba(241, 196, 15, 0.6);
+        }
+        .bead.meru::after {
+            content: '🕉️';
+            position: absolute;
+            font-size: 12px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .counter-display {
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 12px rgba(230, 126, 34, 0.7), 0 4px 8px rgba(0,0,0,0.8);
+            margin: 5px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            color: #a4b0be;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stats {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #f1c40f;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn-tap {
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, #e67e22, #d35400);
+            color: white;
+            border: 2px solid #f39c12;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #9e3d00, 0 10px 15px rgba(0,0,0,0.5);
+            outline: none;
+            margin: 10px 0 15px 0;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-tap:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #9e3d00, 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .btn-reset {
+            background-color: transparent;
+            color: #a4b0be;
+            border: 1px solid #57606f;
+            padding: 6px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .btn-reset:hover {
+            color: #fff;
+            border-color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .completed-msg {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+            height: 25px;
+            margin-top: 5px;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Jaap Mala</h1>
+
+        <div class="mala-track">
+            <div class="beads-container">
+                <div class="bead" id="pos0"></div>
+                <div class="bead" id="pos1"></div>
+                <div class="bead active-bead" id="pos2"></div>
+                <div class="bead" id="pos3"></div>
+                <div class="bead" id="pos4"></div>
+            </div>
+        </div>
+
+        <div class="label">Bead Count</div>
+        <div class="counter-display" id="count">0</div>
+        <div class="completed-msg" id="msg"></div>
+
+        <button class="btn-tap" id="tapBtn" type="button">TAP</button>
+
+        <div class="stats">
+            ✨ Malas Done: <span id="malas">0</span> ✨
+        </div>
+
+        <button class="btn-reset" id="resetBtn" type="button">Reset Session</button>
+    </div>
+
+    <script>
+        let currentCount = 0;
+        let malasCompleted = 0;
+        const targetBeads = 108;
+
+        const countDisplay = document.getElementById('count');
+        const malasDisplay = document.getElementById('malas');
+        const msgDisplay = document.getElementById('msg');
+
+        function updateBeadAppearance() {
+            for (let i = 0; i < 5; i++) {
+                const element = document.getElementById(`pos${i}`);
+                element.classList.remove('meru');
+            }
+
+            const centerValue = currentCount % targetBeads;
+
+            if (centerValue === 0) {
+                document.getElementById('pos2').classList.add('meru');
+            } else if (centerValue === 1) {
+                document.getElementById('pos1').classList.add('meru');
+            } else if (centerValue === 2) {
+                document.getElementById('pos0').classList.add('meru');
+            } else if (centerValue === targetBeads - 1) {
+                document.getElementById('pos3').classList.add('meru');
+            } else if (centerValue === targetBeads - 2) {
+                document.getElementById('pos4').classList.add('meru');
+            }
+        }
+
+        function incrementCount() {
+            currentCount++;
+            msgDisplay.textContent = '';
+
+            if (currentCount > targetBeads) {
+                currentCount = 1;
+            }
+
+            const centerBead = document.getElementById('pos2');
+            centerBead.style.transform = 'scale(0.85)';
+            setTimeout(() => {
+                centerBead.style.transform = '';
+            }, 50);
+
+            if (currentCount === targetBeads) {
+                malasCompleted++;
+                msgDisplay.textContent = 'Mala 108 Complete! 📿';
+                malasDisplay.textContent = String(malasCompleted);
+            }
+
+            countDisplay.textContent = String(currentCount);
+            updateBeadAppearance();
+        }
+
+        function resetCounter() {
+            currentCount = 0;
+            malasCompleted = 0;
+            countDisplay.textContent = '0';
+            malasDisplay.textContent = '0';
+            msgDisplay.textContent = '';
+            updateBeadAppearance();
+        }
+
+        // Bind events via listeners instead of inline HTML attributes
+        document.getElementById('tapBtn').addEventListener('click', incrementCount);
+        document.getElementById('resetBtn').addEventListener('click', resetCounter);
+
+        // Handle spacebar triggers, but only when not focused on a button
+        // (prevents double-firing: Enter/Space already activates a focused button)
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && document.activeElement.tagName !== 'BUTTON') {
+                e.preventDefault();
+                incrementCount();
+            }
+        });
+    </script>
+</body>
+</html>
