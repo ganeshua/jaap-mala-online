@@ -5,8 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
     <meta name="referrer" content="no-referrer">
-    <title>Rudraksha Jaap Mala Counter</title>
+
+    <!-- Primary SEO tags -->
+    <title>Free Online Jaap Mala Counter - Rudraksha 108 Bead Chanting Counter</title>
+    <meta name="description" content="Free online Jaap Mala counter for meditation and mantra chanting. Track your 108-bead rudraksha mala count with one tap, see completed malas, and use spacebar for hands-free counting.">
+    <meta name="keywords" content="jaap mala counter, mala counter online, rudraksha counter, 108 bead counter, mantra jaap counter, chanting counter, digital japa mala, meditation counter, shri swami samarth jaap counter, radha radha jaap counter, shri swami samarth, radha radha counter">
+    <meta name="author" content="ganeshua">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Online Jaap Mala Counter - 108 Bead Chanting Counter">
+    <meta property="og:description" content="Track your mantra jaap with a free digital 108-bead mala counter. Tap or press spacebar to count, see completed malas at a glance.">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:site_name" content="Jaap Mala Counter">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Online Jaap Mala Counter">
+    <meta name="twitter:description" content="Track your mantra jaap with a free digital 108-bead mala counter, right in your browser.">
+
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Jaap Mala Counter",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Any",
+        "description": "A free online 108-bead Jaap Mala counter for meditation and mantra chanting practice.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #140a00, #2c1600);
@@ -14,16 +60,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
+            justify-content: flex-start;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 24px 16px calc(16px + env(safe-area-inset-bottom));
             user-select: none;
         }
 
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             background-image: radial-gradient(rgba(230, 126, 34, 0.12) 1px, transparent 0);
@@ -34,12 +81,13 @@
 
         .container {
             background: rgba(20, 10, 5, 0.95);
-            padding: 30px;
+            padding: 28px 22px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 20px rgba(211, 84, 0, 0.2);
             border: 1px solid rgba(211, 84, 0, 0.3);
             text-align: center;
-            width: 320px;
+            width: 100%;
+            max-width: 360px;
             z-index: 1;
             backdrop-filter: blur(10px);
         }
@@ -64,6 +112,7 @@
             background: rgba(0, 0, 0, 0.6);
             border-radius: 12px;
             border: 1px solid rgba(230, 126, 34, 0.2);
+            width: 100%;
         }
 
         .mala-track::before {
@@ -207,12 +256,100 @@
             margin-top: 5px;
             text-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
         }
+
+        .seo-subtext {
+            font-size: 0.75rem;
+            color: #a4b0be;
+            margin: 0 0 10px 0;
+        }
+
+        .seo-info {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(230, 126, 34, 0.2);
+            text-align: left;
+        }
+
+        .seo-info h2 {
+            font-size: 0.9rem;
+            color: #f39c12;
+            margin: 0 0 8px 0;
+        }
+
+        .seo-info p {
+            font-size: 0.75rem;
+            color: #a4b0be;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .site-footer {
+            position: static;
+            margin-top: 18px;
+            font-size: 0.65rem;
+            color: #57606f;
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+            z-index: 1;
+            padding: 0 8px;
+        }
+
+        /* Small phones: tighten spacing and scale key elements down */
+        @media (max-width: 360px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .beads-container {
+                gap: 8px;
+            }
+
+            .bead {
+                width: 34px;
+                height: 34px;
+            }
+
+            .counter-display {
+                font-size: 3.4rem;
+            }
+
+            .btn-tap {
+                width: 108px;
+                height: 108px;
+                font-size: 1.15rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Tablets and larger: give the card a bit more breathing room */
+        @media (min-width: 700px) {
+            .container {
+                max-width: 420px;
+                padding: 36px 32px;
+            }
+
+            .site-footer {
+                max-width: 420px;
+            }
+        }
+
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .bead, .btn-tap, .btn-tap:active {
+                transition: none;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Jaap Mala</h1>
+    <main class="container">
+        <h1>Jaap Mala Counter</h1>
+        <p class="seo-subtext">Free online 108-bead mala counter for mantra chanting and meditation</p>
 
         <div class="mala-track">
             <div class="beads-container">
@@ -235,9 +372,20 @@
         </div>
 
         <button class="btn-reset" id="resetBtn" type="button">Reset Session</button>
-    </div>
+
+        <section class="seo-info">
+            <h2>How to Use This Jaap Mala Counter</h2>
+            <p>Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you've completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Free Rudraksha Jaap Mala Counter &mdash; a simple digital tool for mantra japa and meditation practice.</p>
+    </footer>
 
     <script>
+        const STORAGE_KEY = 'jaapMalaCounterState';
+
         let currentCount = 0;
         let malasCompleted = 0;
         const targetBeads = 108;
@@ -245,6 +393,69 @@
         const countDisplay = document.getElementById('count');
         const malasDisplay = document.getElementById('malas');
         const msgDisplay = document.getElementById('msg');
+
+        // ---- Persistence: remember progress across page refreshes ----
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    currentCount,
+                    malasCompleted
+                }));
+            } catch (err) {
+                // Storage may be unavailable (private browsing, quota, etc.) — fail silently
+                console.warn('Could not save mala progress:', err);
+            }
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Number.isInteger(parsed.currentCount) && Number.isInteger(parsed.malasCompleted)) {
+                        currentCount = parsed.currentCount;
+                        malasCompleted = parsed.malasCompleted;
+                    }
+                }
+            } catch (err) {
+                console.warn('Could not load saved mala progress:', err);
+            }
+            countDisplay.textContent = String(currentCount);
+            malasDisplay.textContent = String(malasCompleted);
+            updateBeadAppearance();
+        }
+
+        // ---- Sound: soft bell chime, synthesized (no external audio file needed) ----
+        let audioCtx = null;
+
+        function playBellChime() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                // A little bell-like chord: a fundamental plus a couple of soft overtones
+                const now = audioCtx.currentTime;
+                const frequencies = [880, 1320, 1760]; // A5 + overtones
+                frequencies.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+
+                    const startGain = i === 0 ? 0.25 : 0.08;
+                    gain.gain.setValueAtTime(0, now);
+                    gain.gain.linearRampToValueAtTime(startGain, now + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 1.8);
+                });
+            } catch (err) {
+                console.warn('Could not play chime:', err);
+            }
+        }
 
         function updateBeadAppearance() {
             for (let i = 0; i < 5; i++) {
@@ -285,10 +496,12 @@
                 malasCompleted++;
                 msgDisplay.textContent = 'Mala 108 Complete! 📿';
                 malasDisplay.textContent = String(malasCompleted);
+                playBellChime();
             }
 
             countDisplay.textContent = String(currentCount);
             updateBeadAppearance();
+            saveState();
         }
 
         function resetCounter() {
@@ -298,6 +511,7 @@
             malasDisplay.textContent = '0';
             msgDisplay.textContent = '';
             updateBeadAppearance();
+            saveState();
         }
 
         // Bind events via listeners instead of inline HTML attributes
@@ -312,6 +526,9 @@
                 incrementCount();
             }
         });
+
+        // Restore any saved progress when the page loads
+        loadState();
     </script>
 </body>
 </html>
