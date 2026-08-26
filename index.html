@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
     <meta name="referrer" content="no-referrer">
 
     <!-- Primary SEO tags -->
     <title>Free Online Jaap Mala Counter - Rudraksha 108 Bead Chanting Counter</title>
-    <meta name="description" content="Free online Jaap Mala counter for meditation and mantra chanting. Track your 108-bead rudraksha mala count with one tap, see completed malas, and use spacebar for hands-free counting.">
-    <meta name="keywords" content="jaap mala counter, mala counter online, rudraksha counter, 108 bead counter, mantra jaap counter, chanting counter, digital japa mala, meditation counter, shri swami samarth jaap counter, radha radha jaap counter, shri swami samarth, radha radha counter">
+    <meta name="description" content="Free online Jaap Mala counter for meditation and mantra chanting. Track your 108-bead rudraksha mala count with one tap, see completed malas, and use spacebar for hands-free counting. Available in English, Marathi and Hindi.">
+    <meta name="keywords" content="jaap mala counter, mala counter online, rudraksha counter, 108 bead counter, mantra jaap counter, chanting counter, digital japa mala, meditation counter, shri swami samarth jaap counter, radha radha jaap counter, shri swami samarth, radha radha counter, jaap mala counter marathi, jaap mala counter hindi">
     <meta name="author" content="ganeshua">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yourdomain.com/">
@@ -35,7 +35,7 @@
         "name": "Jaap Mala Counter",
         "applicationCategory": "LifestyleApplication",
         "operatingSystem": "Any",
-        "description": "A free online 108-bead Jaap Mala counter for meditation and mantra chanting practice.",
+        "description": "A free online 108-bead Jaap Mala counter for meditation and mantra chanting practice, available in English, Marathi and Hindi.",
         "offers": {
             "@type": "Offer",
             "price": "0",
@@ -43,6 +43,21 @@
         }
     }
     </script>
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HG35E5TNB5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HG35E5TNB5');
+    </script>
+
+    <!-- Google Fonts: a clean font for English, and a proper Devanagari font for Marathi/Hindi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -54,7 +69,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #140a00, #2c1600);
             color: #fff;
             display: flex;
@@ -65,6 +80,12 @@
             min-height: 100dvh;
             padding: 24px 16px calc(16px + env(safe-area-inset-bottom));
             user-select: none;
+            transition: font-family 0.2s ease;
+        }
+
+        /* Devanagari mode: switch the whole page to the Devanagari-optimized font */
+        body.lang-devanagari {
+            font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body::before {
@@ -92,6 +113,38 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Language switcher */
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(230, 126, 34, 0.4);
+            color: #a4b0be;
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            color: #fff;
+            border-color: #f39c12;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(circle, #e67e22, #d35400);
+            color: #fff;
+            border-color: #f39c12;
+            font-weight: 600;
+        }
+
         h1 {
             font-size: 1.6rem;
             color: #f39c12;
@@ -99,6 +152,11 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        body.lang-devanagari h1 {
+            text-transform: none;
+            letter-spacing: 0.5px;
         }
 
         .mala-track {
@@ -201,6 +259,11 @@
             letter-spacing: 2px;
         }
 
+        body.lang-devanagari .label {
+            text-transform: none;
+            letter-spacing: 0.3px;
+        }
+
         .stats {
             margin: 15px 0;
             font-size: 1.1rem;
@@ -224,6 +287,7 @@
             margin: 10px 0 15px 0;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            font-family: inherit;
         }
 
         .btn-tap:active {
@@ -240,6 +304,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: all 0.2s;
+            font-family: inherit;
         }
 
         .btn-reset:hover {
@@ -283,6 +348,12 @@
             margin: 0;
         }
 
+        body.lang-devanagari .seo-info p,
+        body.lang-devanagari .seo-subtext,
+        body.lang-devanagari footer p {
+            line-height: 1.8;
+        }
+
         .site-footer {
             position: static;
             margin-top: 18px;
@@ -293,6 +364,10 @@
             max-width: 360px;
             z-index: 1;
             padding: 0 8px;
+        }
+
+        .site-footer a {
+            color: #7f8c9a;
         }
 
         /* Small phones: tighten spacing and scale key elements down */
@@ -323,6 +398,11 @@
             h1 {
                 font-size: 1.3rem;
             }
+
+            .lang-btn {
+                padding: 4px 9px;
+                font-size: 0.7rem;
+            }
         }
 
         /* Tablets and larger: give the card a bit more breathing room */
@@ -348,8 +428,14 @@
 <body>
 
     <main class="container">
-        <h1>Jaap Mala Counter</h1>
-        <p class="seo-subtext">Free online 108-bead mala counter for mantra chanting and meditation</p>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+            <button type="button" class="lang-btn active" id="langEn" data-lang="en">English</button>
+            <button type="button" class="lang-btn" id="langMr" data-lang="mr">मराठी</button>
+            <button type="button" class="lang-btn" id="langHi" data-lang="hi">हिंदी</button>
+        </div>
+
+        <h1 id="pageTitle">Jaap Mala Counter</h1>
+        <p class="seo-subtext" id="pageSubtitle">Free online 108-bead mala counter for mantra chanting and meditation</p>
 
         <div class="mala-track">
             <div class="beads-container">
@@ -361,30 +447,31 @@
             </div>
         </div>
 
-        <div class="label">Bead Count</div>
+        <div class="label" id="beadLabel">Bead Count</div>
         <div class="counter-display" id="count">0</div>
         <div class="completed-msg" id="msg"></div>
 
         <button class="btn-tap" id="tapBtn" type="button">TAP</button>
 
         <div class="stats">
-            ✨ Malas Done: <span id="malas">0</span> ✨
+            ✨ <span id="malasLabel">Malas Done</span>: <span id="malas">0</span> ✨
         </div>
 
         <button class="btn-reset" id="resetBtn" type="button">Reset Session</button>
 
         <section class="seo-info">
-            <h2>How to Use This Jaap Mala Counter</h2>
-            <p>Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you've completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.</p>
+            <h2 id="howToTitle">How to Use This Jaap Mala Counter</h2>
+            <p id="howToText">Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you've completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.</p>
         </section>
     </main>
 
     <footer class="site-footer">
-        <p>Free Rudraksha Jaap Mala Counter &mdash; a simple digital tool for mantra japa and meditation practice.</p>
+        <p id="footerText">Free Rudraksha Jaap Mala Counter &mdash; a simple digital tool for mantra japa and meditation practice.</p>
     </footer>
 
     <script>
         const STORAGE_KEY = 'jaapMalaCounterState';
+        const LANG_KEY = 'jaapMalaCounterLang';
 
         let currentCount = 0;
         let malasCompleted = 0;
@@ -394,6 +481,84 @@
         const malasDisplay = document.getElementById('malas');
         const msgDisplay = document.getElementById('msg');
 
+        // ---- Translations ----
+        const TRANSLATIONS = {
+            en: {
+                pageTitle: 'Jaap Mala Counter',
+                pageSubtitle: 'Free online 108-bead mala counter for mantra chanting and meditation',
+                beadLabel: 'Bead Count',
+                tapBtn: 'TAP',
+                resetBtn: 'Reset Session',
+                malasLabel: 'Malas Done',
+                completedMsg: 'Mala 108 Complete! 📿',
+                howToTitle: 'How to Use This Jaap Mala Counter',
+                howToText: 'Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you\u2019ve completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.',
+                footerText: 'Free Rudraksha Jaap Mala Counter \u2014 a simple digital tool for mantra japa and meditation practice.'
+            },
+            mr: {
+                pageTitle: 'जप माळ काउंटर',
+                pageSubtitle: 'मंत्र जप आणि ध्यानासाठी मोफत ऑनलाइन १०८ मणी माळ काउंटर',
+                beadLabel: 'मणी संख्या',
+                tapBtn: 'टॅप करा',
+                resetBtn: 'सत्र रीसेट करा',
+                malasLabel: 'पूर्ण माळा',
+                completedMsg: 'माळा १०८ पूर्ण! 📿',
+                howToTitle: 'ही जप माळ काउंटर कशी वापरावी',
+                howToText: 'प्रत्येक मण्यासाठी बटण दाबा (किंवा स्पेसबार दाबा) आणि तुमचा मंत्र जपत रहा. काउंटर आपोआप १०८ मण्यांची पूर्ण माळा मोजतो आणि पुढील फेरीसाठी रीसेट होतो, तसेच या सत्रात तुम्ही किती माळा पूर्ण केल्या याची नोंद ठेवतो. "श्री स्वामी समर्थ" आणि "राधा राधा" जपासाठीही उत्तम.',
+                footerText: 'मोफत रुद्राक्ष जप माळ काउंटर — मंत्र जप आणि ध्यान सरावासाठी एक साधे डिजिटल साधन.'
+            },
+            hi: {
+                pageTitle: 'जाप माला काउंटर',
+                pageSubtitle: 'मंत्र जाप और ध्यान के लिए मुफ्त ऑनलाइन 108 मनके माला काउंटर',
+                beadLabel: 'मनका गणना',
+                tapBtn: 'टैप करें',
+                resetBtn: 'सत्र रीसेट करें',
+                malasLabel: 'पूर्ण मालाएँ',
+                completedMsg: 'माला 108 पूर्ण! 📿',
+                howToTitle: 'इस जाप माला काउंटर का उपयोग कैसे करें',
+                howToText: 'हर मनके के लिए बटन दबाएँ (या स्पेसबार दबाएँ) और अपना मंत्र जपते रहें। काउंटर स्वतः 108 मनकों की पूरी माला गिनता है और अगले दौर के लिए रीसेट हो जाता है, साथ ही यह भी बताता है कि आपने इस सत्र में कितनी मालाएँ पूरी कीं। "श्री स्वामी समर्थ" और "राधा राधा" जाप के लिए भी बेहतरीन।',
+                footerText: 'मुफ्त रुद्राक्ष जाप माला काउंटर — मंत्र जाप और ध्यान अभ्यास के लिए एक सरल डिजिटल उपकरण।'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function applyLanguage(lang) {
+            const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+            currentLang = lang;
+
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('pageSubtitle').textContent = t.pageSubtitle;
+            document.getElementById('beadLabel').textContent = t.beadLabel;
+            document.getElementById('tapBtn').textContent = t.tapBtn;
+            document.getElementById('resetBtn').textContent = t.resetBtn;
+            document.getElementById('malasLabel').textContent = t.malasLabel;
+            document.getElementById('howToTitle').textContent = t.howToTitle;
+            document.getElementById('howToText').textContent = t.howToText;
+            document.getElementById('footerText').textContent = t.footerText;
+
+            if (currentCount === targetBeads && malasCompleted > 0) {
+                msgDisplay.textContent = t.completedMsg;
+            }
+
+            document.documentElement.lang = lang;
+            document.body.classList.toggle('lang-devanagari', lang === 'mr' || lang === 'hi');
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            try {
+                localStorage.setItem(LANG_KEY, lang);
+            } catch (err) {
+                console.warn('Could not save language preference:', err);
+            }
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+        });
+
         // ---- Persistence: remember progress across page refreshes ----
         function saveState() {
             try {
@@ -402,7 +567,6 @@
                     malasCompleted
                 }));
             } catch (err) {
-                // Storage may be unavailable (private browsing, quota, etc.) — fail silently
                 console.warn('Could not save mala progress:', err);
             }
         }
@@ -420,8 +584,17 @@
             } catch (err) {
                 console.warn('Could not load saved mala progress:', err);
             }
+
+            let savedLang = 'en';
+            try {
+                savedLang = localStorage.getItem(LANG_KEY) || 'en';
+            } catch (err) {
+                console.warn('Could not load saved language:', err);
+            }
+
             countDisplay.textContent = String(currentCount);
             malasDisplay.textContent = String(malasCompleted);
+            applyLanguage(savedLang);
             updateBeadAppearance();
         }
 
@@ -433,9 +606,8 @@
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                // A little bell-like chord: a fundamental plus a couple of soft overtones
                 const now = audioCtx.currentTime;
-                const frequencies = [880, 1320, 1760]; // A5 + overtones
+                const frequencies = [880, 1320, 1760];
                 frequencies.forEach((freq, i) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
@@ -494,9 +666,15 @@
 
             if (currentCount === targetBeads) {
                 malasCompleted++;
-                msgDisplay.textContent = 'Mala 108 Complete! 📿';
+                msgDisplay.textContent = TRANSLATIONS[currentLang].completedMsg;
                 malasDisplay.textContent = String(malasCompleted);
                 playBellChime();
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'mala_completed', {
+                        'malas_completed_session': malasCompleted
+                    });
+                }
             }
 
             countDisplay.textContent = String(currentCount);
@@ -514,12 +692,9 @@
             saveState();
         }
 
-        // Bind events via listeners instead of inline HTML attributes
         document.getElementById('tapBtn').addEventListener('click', incrementCount);
         document.getElementById('resetBtn').addEventListener('click', resetCounter);
 
-        // Handle spacebar triggers, but only when not focused on a button
-        // (prevents double-firing: Enter/Space already activates a focused button)
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space' && document.activeElement.tagName !== 'BUTTON') {
                 e.preventDefault();
@@ -527,7 +702,6 @@
             }
         });
 
-        // Restore any saved progress when the page loads
         loadState();
     </script>
 </body>
