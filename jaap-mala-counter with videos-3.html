@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://i.ytimg.com; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Primary SEO tags -->
+    <title>Free Online Jaap Mala Counter - Rudraksha 108 Bead Chanting Counter</title>
+    <meta name="description" content="Free online Jaap Mala counter for meditation and mantra chanting. Track your 108-bead rudraksha mala count with one tap, see completed malas, and use spacebar for hands-free counting. Available in English, Marathi and Hindi.">
+    <meta name="keywords" content="jaap mala counter, mala counter online, rudraksha counter, 108 bead counter, mantra jaap counter, chanting counter, digital japa mala, meditation counter, shri swami samarth jaap counter, radha radha jaap counter, shri swami samarth, radha radha counter, jaap mala counter marathi, jaap mala counter hindi, premanand ji maharaj satsang, dindori pranit seva marg">
+    <meta name="author" content="ganeshua">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ganeshua.github.io/jaap-mala-online/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Online Jaap Mala Counter - 108 Bead Chanting Counter">
+    <meta property="og:description" content="Track your mantra jaap with a free digital 108-bead mala counter. Tap or press spacebar to count, see completed malas at a glance.">
+    <meta property="og:url" content="https://ganeshua.github.io/jaap-mala-online/">
+    <meta property="og:site_name" content="Jaap Mala Counter">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Online Jaap Mala Counter">
+    <meta name="twitter:description" content="Track your mantra jaap with a free digital 108-bead mala counter, right in your browser.">
+
+    <meta name="google-adsense-account" content="ca-pub-9722218911192432">
+
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Jaap Mala Counter",
+        "applicationCategory": "LifestyleApplication",
+        "url": "https://ganeshua.github.io/jaap-mala-online/",
+        "operatingSystem": "Any",
+        "inLanguage": "en",
+        "description": "A free online 108-bead Jaap Mala counter for meditation and mantra chanting practice, available in English, Marathi and Hindi.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+
+    <!-- 1. PRECONNECTS FOR FASTER AD & FONT LOADING (Crucial for AdSense Core Web Vitals) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.youtube-nocookie.com">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HG35E5TNB5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HG35E5TNB5');
+    </script>
+
+    <!-- Google Fonts: a clean font for English, and a proper Devanagari font for Marathi/Hindi -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #140a00, #2c1600);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 24px 16px calc(16px + env(safe-area-inset-bottom));
+            user-select: none;
+            transition: font-family 0.2s ease;
+        }
+
+        body.lang-devanagari {
+            font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(230, 126, 34, 0.12) 1px, transparent 0);
+            background-size: 24px 24px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            background: rgba(20, 10, 5, 0.95);
+            padding: 28px 22px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 20px rgba(211, 84, 0, 0.2);
+            border: 1px solid rgba(211, 84, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Top navigation menu */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            width: 100%;
+            max-width: 360px;
+            z-index: 1;
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: rgba(20, 10, 5, 0.8);
+            border: 1px solid rgba(211, 84, 0, 0.4);
+            color: #a4b0be;
+            padding: 10px 8px;
+            border-radius: 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            color: #fff;
+            border-color: #f39c12;
+        }
+
+        .nav-btn.active {
+            background: radial-gradient(circle, #e67e22, #d35400);
+            color: #fff;
+            border-color: #f39c12;
+        }
+
+        .page-section {
+            display: none;
+            width: 100%;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Language switcher */
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(230, 126, 34, 0.4);
+            color: #a4b0be;
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            color: #fff;
+            border-color: #f39c12;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(circle, #e67e22, #d35400);
+            color: #fff;
+            border-color: #f39c12;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: #f39c12;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        body.lang-devanagari h1 {
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+
+        .mala-track {
+            position: relative;
+            height: 80px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(230, 126, 34, 0.2);
+            width: 100%;
+        }
+
+        .mala-track::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e67e22;
+            z-index: 1;
+            box-shadow: 0 0 6px #ff9f43;
+        }
+
+        .mala-track::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #f1c40f;
+            z-index: 4;
+            box-shadow: 0 0 8px #f1c40f;
+        }
+
+        .beads-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .bead {
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle at 35% 35%, #d35400, #873600 45%, #3d1600 90%);
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.8), 2px 4px 6px rgba(0,0,0,0.6);
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .bead::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            background: repeating-radial-gradient(circle, transparent, transparent 3px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0.2) 5px);
+            opacity: 0.6;
+        }
+
+        .bead.active-bead {
+            transform: scale(1.15);
+            filter: brightness(1.25);
+            box-shadow: 0 0 15px rgba(230, 126, 34, 0.6), inset -2px -2px 6px rgba(0,0,0,0.8);
+        }
+
+        .bead.meru {
+            background: radial-gradient(circle at 35% 35%, #f1c40f, #d35400 60%, #5e1d00);
+            border: 1px solid #f39c12;
+            box-shadow: 0 0 12px rgba(241, 196, 15, 0.6);
+        }
+        .bead.meru::after {
+            content: '🕉️';
+            position: absolute;
+            font-size: 12px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .counter-display {
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 12px rgba(230, 126, 34, 0.7), 0 4px 8px rgba(0,0,0,0.8);
+            margin: 5px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            color: #a4b0be;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        body.lang-devanagari .label {
+            text-transform: none;
+            letter-spacing: 0.3px;
+        }
+
+        .stats {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #f1c40f;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn-tap {
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, #e67e22, #d35400);
+            color: white;
+            border: 2px solid #f39c12;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #9e3d00, 0 10px 15px rgba(0,0,0,0.5);
+            outline: none;
+            margin: 10px 0 15px 0;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            font-family: inherit;
+        }
+
+        .btn-tap:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #9e3d00, 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .btn-reset {
+            background-color: transparent;
+            color: #a4b0be;
+            border: 1px solid #57606f;
+            padding: 6px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-reset:hover {
+            color: #fff;
+            border-color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .completed-msg {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+            height: 25px;
+            margin-top: 5px;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+        }
+
+        .seo-subtext {
+            font-size: 0.75rem;
+            color: #a4b0be;
+            margin: 0 0 10px 0;
+        }
+
+        .seo-info {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(230, 126, 34, 0.2);
+            text-align: left;
+        }
+
+        .seo-info h2 {
+            font-size: 0.9rem;
+            color: #f39c12;
+            margin: 0 0 8px 0;
+        }
+
+        .seo-info p {
+            font-size: 0.75rem;
+            color: #a4b0be;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        body.lang-devanagari .seo-info p,
+        body.lang-devanagari .seo-subtext,
+        body.lang-devanagari footer p {
+            line-height: 1.8;
+        }
+
+        .site-footer {
+            position: static;
+            margin-top: 18px;
+            font-size: 0.65rem;
+            color: #57606f;
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+            z-index: 1;
+            padding: 0 8px;
+        }
+
+        .site-footer a {
+            color: #7f8c9a;
+        }
+
+        /* Videos section */
+        .video-block {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .video-block h2 {
+            font-size: 0.95rem;
+            color: #f39c12;
+            margin: 0 0 8px 0;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(230, 126, 34, 0.25);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-credit {
+            font-size: 0.65rem;
+            color: #57606f;
+            margin-top: 6px;
+        }
+
+        .video-credit a {
+            color: #7f8c9a;
+        }
+
+        /* Small phones: tighten spacing and scale key elements down */
+        @media (max-width: 360px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .beads-container {
+                gap: 8px;
+            }
+
+            .bead {
+                width: 34px;
+                height: 34px;
+            }
+
+            .counter-display {
+                font-size: 3.4rem;
+            }
+
+            .btn-tap {
+                width: 108px;
+                height: 108px;
+                font-size: 1.15rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .lang-btn {
+                padding: 4px 9px;
+                font-size: 0.7rem;
+            }
+
+            .nav-btn {
+                font-size: 0.72rem;
+                padding: 8px 6px;
+            }
+        }
+
+        /* Tablets and larger: give the card a bit more breathing room */
+        @media (min-width: 700px) {
+            .container {
+                max-width: 420px;
+                padding: 36px 32px;
+            }
+
+            .site-footer, .top-nav {
+                max-width: 420px;
+            }
+        }
+
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .bead, .btn-tap, .btn-tap:active {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav" role="tablist" aria-label="Main menu">
+        <button type="button" class="nav-btn active" id="navCounter" data-section="counterSection">🕉️ <span id="navCounterLabel">Counter</span></button>
+        <button type="button" class="nav-btn" id="navVideos" data-section="videosSection">📺 <span id="navVideosLabel">Videos</span></button>
+    </nav>
+
+    <main class="container">
+        <div class="lang-switch" role="group" aria-label="Language selector">
+            <button type="button" class="lang-btn active" id="langEn" data-lang="en">English</button>
+            <button type="button" class="lang-btn" id="langMr" data-lang="mr">मराठी</button>
+            <button type="button" class="lang-btn" id="langHi" data-lang="hi">हिंदी</button>
+        </div>
+
+        <!-- Counter section -->
+        <section class="page-section active" id="counterSection">
+            <h1 id="pageTitle">Jaap Mala Counter</h1>
+            <p class="seo-subtext" id="pageSubtitle">Free online 108-bead mala counter for mantra chanting and meditation</p>
+
+            <div class="mala-track">
+                <div class="beads-container">
+                    <div class="bead" id="pos0"></div>
+                    <div class="bead" id="pos1"></div>
+                    <div class="bead active-bead" id="pos2"></div>
+                    <div class="bead" id="pos3"></div>
+                    <div class="bead" id="pos4"></div>
+                </div>
+            </div>
+
+            <div class="label" id="beadLabel">Bead Count</div>
+            <div class="counter-display" id="count">0</div>
+            <div class="completed-msg" id="msg"></div>
+
+            <button class="btn-tap" id="tapBtn" type="button">TAP</button>
+
+            <div class="stats">
+                ✨ <span id="malasLabel">Malas Done</span>: <span id="malas">0</span> ✨
+            </div>
+
+            <button class="btn-reset" id="resetBtn" type="button">Reset Session</button>
+
+            <section class="seo-info">
+                <h2 id="howToTitle">How to Use This Jaap Mala Counter</h2>
+                <p id="howToText">Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you've completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.</p>
+            </section>
+        </section>
+
+        <!-- Videos section -->
+        <section class="page-section" id="videosSection">
+            <h1 id="videosPageTitle" style="font-size:1.2rem;">Satsang Videos</h1>
+
+            <div class="video-block">
+                <h2 id="premanandLabel">Premanand Ji Maharaj &mdash; Latest Video</h2>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/videoseries?list=UUEk1jBxAl6fe-_G37G7huQA"
+                        title="Latest Premanand Ji Maharaj satsang video"
+                        loading="lazy"
+                        allow="accelerometer; encrypted-media; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="video-credit">Source: <a href="https://www.youtube.com/@BhajanMarg" target="_blank" rel="noopener noreferrer">Bhajan Marg (official channel)</a></p>
+            </div>
+
+            <div class="video-block">
+                <h2 id="dindoriLabel">Dindori Pranit Seva Marg &mdash; Latest Video</h2>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/videoseries?list=UU5mIaJno_3MmoNbn0NWwwJg"
+                        title="Latest Dindori Pranit Seva Marg video"
+                        loading="lazy"
+                        allow="accelerometer; encrypted-media; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="video-credit">Source: <a href="https://www.youtube.com/@PradhanKendraDindori" target="_blank" rel="noopener noreferrer">Dindori Pranit Seva Marg (official channel)</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p id="footerText">Free Rudraksha Jaap Mala Counter &mdash; a simple digital tool for mantra japa and meditation practice.</p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'jaapMalaCounterState';
+        const LANG_KEY = 'jaapMalaCounterLang';
+
+        let currentCount = 0;
+        let malasCompleted = 0;
+        const targetBeads = 108;
+
+        const countDisplay = document.getElementById('count');
+        const malasDisplay = document.getElementById('malas');
+        const msgDisplay = document.getElementById('msg');
+
+        // ---- Menu / section navigation ----
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.section).classList.add('active');
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'menu_navigate', { section: btn.dataset.section });
+                }
+            });
+        });
+
+        // ---- Translations ----
+        const TRANSLATIONS = {
+            en: {
+                navCounterLabel: 'Counter',
+                navVideosLabel: 'Videos',
+                pageTitle: 'Jaap Mala Counter',
+                pageSubtitle: 'Free online 108-bead mala counter for mantra chanting and meditation',
+                beadLabel: 'Bead Count',
+                tapBtn: 'TAP',
+                resetBtn: 'Reset Session',
+                malasLabel: 'Malas Done',
+                completedMsg: 'Mala 108 Complete! 📿',
+                howToTitle: 'How to Use This Jaap Mala Counter',
+                howToText: 'Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you\u2019ve completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.',
+                footerText: 'Free Rudraksha Jaap Mala Counter \u2014 a simple digital tool for mantra japa and meditation practice.',
+                videosPageTitle: 'Satsang Videos',
+                premanandLabel: 'Premanand Ji Maharaj \u2014 Latest Video',
+                dindoriLabel: 'Dindori Pranit Seva Marg \u2014 Latest Video'
+            },
+            mr: {
+                navCounterLabel: 'काउंटर',
+                navVideosLabel: 'व्हिडिओ',
+                pageTitle: 'जप माळ काउंटर',
+                pageSubtitle: 'मंत्र जप आणि ध्यानासाठी मोफत ऑनलाइन १०८ मणी माळ काउंटर',
+                beadLabel: 'मणी संख्या',
+                tapBtn: 'टॅप करा',
+                resetBtn: 'सत्र रीसेट करा',
+                malasLabel: 'पूर्ण माळा',
+                completedMsg: 'माळा १०८ पूर्ण! 📿',
+                howToTitle: 'ही जप माळ काउंटर कशी वापरावी',
+                howToText: 'प्रत्येक मण्यासाठी बटण दाबा (किंवा स्पेसबार दाबा) आणि तुमचा मंत्र जपत रहा. काउंटर आपोआप १०८ मण्यांची पूर्ण माळा मोजतो आणि पुढील फेरीसाठी रीसेट होतो, तसेच या सत्रात तुम्ही किती माळा पूर्ण केल्या याची नोंद ठेवतो. "श्री स्वामी समर्थ" आणि "राधा राधा" जपासाठीही उत्तम.',
+                footerText: 'मोफत रुद्राक्ष जप माळ काउंटर — मंत्र जप आणि ध्यान सरावासाठी एक साधे डिजिटल साधन.',
+                videosPageTitle: 'सत्संग व्हिडिओ',
+                premanandLabel: 'प्रेमानंद जी महाराज — नवीनतम व्हिडिओ',
+                dindoriLabel: 'दिंडोरी प्रणीत सेवा मार्ग — नवीनतम व्हिडिओ'
+            },
+            hi: {
+                navCounterLabel: 'काउंटर',
+                navVideosLabel: 'वीडियो',
+                pageTitle: 'जाप माला काउंटर',
+                pageSubtitle: 'मंत्र जाप और ध्यान के लिए मुफ्त ऑनलाइन 108 मनके माला काउंटर',
+                beadLabel: 'मनका गणना',
+                tapBtn: 'टैप करें',
+                resetBtn: 'सत्र रीसेट करें',
+                malasLabel: 'पूर्ण मालाएँ',
+                completedMsg: 'माला 108 पूर्ण! 📿',
+                howToTitle: 'इस जाप माला काउंटर का उपयोग कैसे करें',
+                howToText: 'हर मनके के लिए बटन दबाएँ (या स्पेसबार दबाएँ) और अपना मंत्र जपते रहें। काउंटर स्वतः 108 मनकों की पूरी माला गिनता है और अगले दौर के लिए रीसेट हो जाता है, साथ ही यह भी बताता है कि आपने इस सत्र में कितनी मालाएँ पूरी कीं। "श्री स्वामी समर्थ" और "राधा राधा" जाप के लिए भी बेहतरीन।',
+                footerText: 'मुफ्त रुद्राक्ष जाप माला काउंटर — मंत्र जाप और ध्यान अभ्यास के लिए एक सरल डिजिटल उपकरण।',
+                videosPageTitle: 'सत्संग वीडियो',
+                premanandLabel: 'प्रेमानंद जी महाराज — नवीनतम वीडियो',
+                dindoriLabel: 'दिंडोरी प्रणीत सेवा मार्ग — नवीनतम वीडियो'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function applyLanguage(lang) {
+            const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+            currentLang = lang;
+
+            document.getElementById('navCounterLabel').textContent = t.navCounterLabel;
+            document.getElementById('navVideosLabel').textContent = t.navVideosLabel;
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('pageSubtitle').textContent = t.pageSubtitle;
+            document.getElementById('beadLabel').textContent = t.beadLabel;
+            document.getElementById('tapBtn').textContent = t.tapBtn;
+            document.getElementById('resetBtn').textContent = t.resetBtn;
+            document.getElementById('malasLabel').textContent = t.malasLabel;
+            document.getElementById('howToTitle').textContent = t.howToTitle;
+            document.getElementById('howToText').textContent = t.howToText;
+            document.getElementById('footerText').textContent = t.footerText;
+            document.getElementById('videosPageTitle').textContent = t.videosPageTitle;
+            document.getElementById('premanandLabel').textContent = t.premanandLabel;
+            document.getElementById('dindoriLabel').textContent = t.dindoriLabel;
+
+            if (currentCount === targetBeads && malasCompleted > 0) {
+                msgDisplay.textContent = t.completedMsg;
+            }
+
+            document.documentElement.lang = lang;
+            document.body.classList.toggle('lang-devanagari', lang === 'mr' || lang === 'hi');
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            try {
+                localStorage.setItem(LANG_KEY, lang);
+            } catch (err) {
+                console.warn('Could not save language preference:', err);
+            }
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+        });
+
+        // ---- Persistence: remember progress across page refreshes ----
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    currentCount,
+                    malasCompleted
+                }));
+            } catch (err) {
+                console.warn('Could not save mala progress:', err);
+            }
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Number.isInteger(parsed.currentCount) && Number.isInteger(parsed.malasCompleted)) {
+                        currentCount = parsed.currentCount;
+                        malasCompleted = parsed.malasCompleted;
+                    }
+                }
+            } catch (err) {
+                console.warn('Could not load saved mala progress:', err);
+            }
+
+            let savedLang = 'en';
+            try {
+                savedLang = localStorage.getItem(LANG_KEY) || 'en';
+            } catch (err) {
+                console.warn('Could not load saved language:', err);
+            }
+
+            countDisplay.textContent = String(currentCount);
+            malasDisplay.textContent = String(malasCompleted);
+            applyLanguage(savedLang);
+            updateBeadAppearance();
+        }
+
+        // ---- Sound: soft bell chime, synthesized (no external audio file needed) ----
+        let audioCtx = null;
+
+        function playBellChime() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const now = audioCtx.currentTime;
+                const frequencies = [880, 1320, 1760];
+                frequencies.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+
+                    const startGain = i === 0 ? 0.25 : 0.08;
+                    gain.gain.setValueAtTime(0, now);
+                    gain.gain.linearRampToValueAtTime(startGain, now + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 1.8);
+                });
+            } catch (err) {
+                console.warn('Could not play chime:', err);
+            }
+        }
+
+        function updateBeadAppearance() {
+            for (let i = 0; i < 5; i++) {
+                const element = document.getElementById(`pos${i}`);
+                element.classList.remove('meru');
+            }
+
+            const centerValue = currentCount % targetBeads;
+
+            if (centerValue === 0) {
+                document.getElementById('pos2').classList.add('meru');
+            } else if (centerValue === 1) {
+                document.getElementById('pos1').classList.add('meru');
+            } else if (centerValue === 2) {
+                document.getElementById('pos0').classList.add('meru');
+            } else if (centerValue === targetBeads - 1) {
+                document.getElementById('pos3').classList.add('meru');
+            } else if (centerValue === targetBeads - 2) {
+                document.getElementById('pos4').classList.add('meru');
+            }
+        }
+
+        function incrementCount() {
+            currentCount++;
+            msgDisplay.textContent = '';
+
+            if (currentCount > targetBeads) {
+                currentCount = 1;
+            }
+
+            const centerBead = document.getElementById('pos2');
+            centerBead.style.transform = 'scale(0.85)';
+            setTimeout(() => {
+                centerBead.style.transform = '';
+            }, 50);
+
+            if (currentCount === targetBeads) {
+                malasCompleted++;
+                msgDisplay.textContent = TRANSLATIONS[currentLang].completedMsg;
+                malasDisplay.textContent = String(malasCompleted);
+                playBellChime();
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'mala_completed', {
+                        'malas_completed_session': malasCompleted
+                    });
+                }
+            }
+
+            countDisplay.textContent = String(currentCount);
+            updateBeadAppearance();
+            saveState();
+        }
+
+        function resetCounter() {
+            currentCount = 0;
+            malasCompleted = 0;
+            countDisplay.textContent = '0';
+            malasDisplay.textContent = '0';
+            msgDisplay.textContent = '';
+            updateBeadAppearance();
+            saveState();
+        }
+
+        document.getElementById('tapBtn').addEventListener('click', incrementCount);
+        document.getElementById('resetBtn').addEventListener('click', resetCounter);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && document.activeElement.tagName !== 'BUTTON') {
+                e.preventDefault();
+                incrementCount();
+            }
+        });
+
+        loadState();
+    </script>
+</body>
+</html>
