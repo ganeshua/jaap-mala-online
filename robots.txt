@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ganeshua.github.io/jaap-mala-online/sitemap.xml
+Sitemap: https://nityabhaktimarg.com/sitemap.xml
