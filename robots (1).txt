@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nityabhaktimarg.com/sitemap.xml
