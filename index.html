@@ -913,6 +913,8 @@
             padding: 14px 14px 10px;
             text-align: left;
             -webkit-overflow-scrolling: touch;
+            --stotra-font-scale: 1;
+            transition: background 0.2s ease, color 0.2s ease;
         }
 
         .stotra-scroll::-webkit-scrollbar {
@@ -927,14 +929,14 @@
         .stotra-doha {
             font-style: italic;
             color: #f1c40f;
-            font-size: 0.85rem;
+            font-size: calc(0.85rem * var(--stotra-font-scale, 1));
             line-height: 1.8;
             margin: 0 0 12px 0;
             text-align: center;
         }
 
         .stotra-verse {
-            font-size: 0.88rem;
+            font-size: calc(0.88rem * var(--stotra-font-scale, 1));
             line-height: 1.85;
             margin: 0 0 9px 0;
             color: #f0e6da;
@@ -942,16 +944,85 @@
 
         .stotra-verse .vnum {
             color: #e67e22;
-            font-size: 0.7rem;
+            font-size: calc(0.7rem * var(--stotra-font-scale, 1));
             margin-left: 4px;
         }
 
         .stotra-closing {
             font-style: italic;
             color: #f1c40f;
-            font-size: 0.82rem;
+            font-size: calc(0.82rem * var(--stotra-font-scale, 1));
             text-align: center;
             margin-top: 10px;
+        }
+
+        /* Light reading mode: easier on the eyes for daytime / older readers */
+        .stotra-scroll.light-reading {
+            background: #fdf6e3;
+            border-color: rgba(211, 84, 0, 0.5);
+        }
+
+        .stotra-scroll.light-reading .stotra-doha,
+        .stotra-scroll.light-reading .stotra-closing {
+            color: #9a5b0e;
+        }
+
+        .stotra-scroll.light-reading .stotra-verse {
+            color: #2b1a05;
+        }
+
+        .stotra-scroll.light-reading .stotra-verse .vnum {
+            color: #c0392b;
+        }
+
+        .stotra-scroll.light-reading::-webkit-scrollbar-thumb {
+            background: rgba(211, 84, 0, 0.35);
+        }
+
+        /* ---- Stotra reading toolbar: TTS, font size, light/dark, share ---- */
+        .stotra-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .stotra-tool-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(20, 10, 5, 0.8);
+            border: 1px solid rgba(230, 126, 34, 0.4);
+            color: #e8e2d8;
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: inherit;
+            padding: 7px 11px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .stotra-tool-btn:hover {
+            border-color: #f39c12;
+            color: #fff;
+        }
+
+        .stotra-tool-btn.tool-active {
+            background: linear-gradient(90deg, rgba(230,126,34,0.4), rgba(107,45,144,0.4));
+            color: #f1c40f;
+            border-color: #f39c12;
+        }
+
+        .stotra-font-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .stotra-font-controls .stotra-tool-btn {
+            padding: 7px 13px;
         }
 
         /* ---- Fixed gold corner menu button (quick jump links) ---- */
@@ -1300,6 +1371,20 @@
                 </div>
                 <button type="button" class="stotra-scroll-btn" id="stotraScrollRight" aria-label="Scroll right">
                     <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <div class="stotra-toolbar">
+                <div class="stotra-font-controls">
+                    <button type="button" class="stotra-tool-btn" id="stotraFontMinus" aria-label="Decrease text size">A−</button>
+                    <button type="button" class="stotra-tool-btn" id="stotraFontReset" aria-label="Reset text size">⟲</button>
+                    <button type="button" class="stotra-tool-btn" id="stotraFontPlus" aria-label="Increase text size">A+</button>
+                </div>
+                <button type="button" class="stotra-tool-btn" id="stotraThemeToggle" aria-pressed="false">
+                    <span id="stotraThemeIcon">☀️</span><span id="stotraThemeLabel">Light Mode</span>
+                </button>
+                <button type="button" class="stotra-tool-btn" id="stotraShareBtn">
+                    <span>📤</span><span id="stotraShareLabel">Share</span>
                 </button>
             </div>
 
@@ -2058,6 +2143,10 @@
             const panel = document.getElementById(stotraId);
             if (panel) panel.classList.add('active');
 
+            if (typeof window.stopStotraSpeech === 'function') {
+                window.stopStotraSpeech();
+            }
+
             if (typeof gtag === 'function') {
                 gtag('event', 'stotra_view', { stotra: stotraId });
             }
@@ -2084,6 +2173,102 @@
                 closeCornerMenu();
             });
         });
+
+        // ================================================================
+        // Stotra reading toolbar: Text-to-Speech, Font size, Light/Dark, Share
+        // ================================================================
+        (function () {
+            const allScrolls = () => document.querySelectorAll('.stotra-scroll');
+
+            function getActivePanel() {
+                return document.querySelector('.stotra-panel.active');
+            }
+            function getActiveScroll() {
+                const panel = getActivePanel();
+                return panel ? panel.querySelector('.stotra-scroll') : null;
+            }
+            function getActiveStotraName() {
+                const tab = document.querySelector('.stotra-tab.active');
+                return tab ? tab.textContent.trim() : 'Stotra';
+            }
+
+
+            // ---------------- Font size ----------------
+            const FONT_MIN = 0.8, FONT_MAX = 1.6, FONT_STEP = 0.1;
+            let fontScale = parseFloat(localStorage.getItem('stotraFontScale')) || 1;
+
+            function applyFontScale() {
+                allScrolls().forEach(el => el.style.setProperty('--stotra-font-scale', fontScale));
+                localStorage.setItem('stotraFontScale', fontScale.toFixed(2));
+            }
+            applyFontScale();
+
+            document.getElementById('stotraFontMinus').addEventListener('click', () => {
+                fontScale = Math.max(FONT_MIN, +(fontScale - FONT_STEP).toFixed(2));
+                applyFontScale();
+            });
+            document.getElementById('stotraFontPlus').addEventListener('click', () => {
+                fontScale = Math.min(FONT_MAX, +(fontScale + FONT_STEP).toFixed(2));
+                applyFontScale();
+            });
+            document.getElementById('stotraFontReset').addEventListener('click', () => {
+                fontScale = 1;
+                applyFontScale();
+            });
+
+            // ---------------- Light / Dark reading mode ----------------
+            const themeToggle = document.getElementById('stotraThemeToggle');
+            const themeIcon = document.getElementById('stotraThemeIcon');
+            const themeLabel = document.getElementById('stotraThemeLabel');
+            let lightMode = localStorage.getItem('stotraLightMode') === '1';
+
+            function applyReadingTheme() {
+                allScrolls().forEach(el => el.classList.toggle('light-reading', lightMode));
+                if (lightMode) {
+                    themeToggle.classList.add('tool-active');
+                    themeIcon.textContent = '🌙';
+                    themeLabel.textContent = 'Dark Mode';
+                } else {
+                    themeToggle.classList.remove('tool-active');
+                    themeIcon.textContent = '☀️';
+                    themeLabel.textContent = 'Light Mode';
+                }
+                localStorage.setItem('stotraLightMode', lightMode ? '1' : '0');
+            }
+            applyReadingTheme();
+
+            themeToggle.addEventListener('click', () => {
+                lightMode = !lightMode;
+                applyReadingTheme();
+            });
+
+            // ---------------- Share ----------------
+            document.getElementById('stotraShareBtn').addEventListener('click', async () => {
+                const scroll = getActiveScroll();
+                const name = getActiveStotraName();
+                if (!scroll) return;
+
+                // Grab a short opening snippet (not the entire hymn) to share as a preview
+                const firstLine = scroll.querySelector('.stotra-doha, .stotra-verse');
+                const snippet = firstLine ? firstLine.innerText.trim() : '';
+                const shareText = `${name}\n\n${snippet}\n\nRead the full text on Nitya Bhakti Marg:\nhttps://www.nityabhaktimarg.com/#stotraSection`;
+
+                if (navigator.share) {
+                    try {
+                        await navigator.share({ title: name, text: shareText });
+                    } catch (err) {
+                        // user cancelled share sheet - no action needed
+                    }
+                } else {
+                    const waUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+                    window.open(waUrl, '_blank', 'noopener');
+                }
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'stotra_share', { stotra: name });
+                }
+            });
+        })();
     </script>
 </body>
 </html>
