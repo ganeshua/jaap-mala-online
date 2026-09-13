@@ -1174,8 +1174,7 @@
         }
 
         .util-field input {
-            width: 78px;
-            box-sizing: border-box;
+            width: 64px;
             text-align: center;
             background: rgba(0,0,0,0.3);
             border: 1px solid rgba(211, 84, 0, 0.4);
@@ -1185,30 +1184,6 @@
             font-size: 1.1rem;
             font-weight: 700;
             padding: 8px 4px;
-        }
-
-        .util-field input[type="date"] {
-            width: 150px;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            color-scheme: dark;
-        }
-
-        #jaapLogCount {
-            width: 150px;
-        }
-
-        @media (max-width: 360px) {
-            #jaapLogCount {
-                width: 132px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .util-field input[type="date"] {
-                width: 132px;
-                font-size: 0.85rem;
-            }
         }
 
         .util-time-input {
@@ -1241,113 +1216,6 @@
             color: #f1c40f;
             font-weight: 700;
             animation: radha-pulse 1s ease-in-out infinite;
-        }
-
-        /* ---- Naam Jaap Log (date-wise manual entries) ---- */
-        .jaap-log {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(211, 84, 0, 0.25);
-            text-align: center;
-        }
-
-        .jaap-log-summary {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(211, 84, 0, 0.3);
-            border-radius: 12px;
-            padding: 10px 8px;
-            margin: 8px 0 12px;
-        }
-
-        .jaap-log-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .jaap-log-stat .stat-num {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #f1c40f;
-        }
-
-        .jaap-log-stat .stat-label {
-            font-size: 0.62rem;
-            color: #a4b0be;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .jaap-log-list {
-            max-height: 260px;
-            overflow-y: auto;
-            text-align: left;
-        }
-
-        .jaap-log-empty {
-            text-align: center;
-            font-size: 0.75rem;
-            color: #57606f;
-            padding: 10px 0;
-        }
-
-        .jaap-log-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            background: rgba(20, 10, 5, 0.6);
-            border: 1px solid rgba(211, 84, 0, 0.2);
-            border-radius: 10px;
-            padding: 8px 10px;
-            margin-bottom: 6px;
-        }
-
-        .jaap-log-row .jl-date {
-            font-size: 0.75rem;
-            color: #e8e2d8;
-            font-weight: 600;
-        }
-
-        .jaap-log-row .jl-count {
-            font-size: 0.8rem;
-            color: #f39c12;
-            font-weight: 700;
-            font-family: 'Courier New', monospace;
-        }
-
-        .jaap-log-row .jl-actions {
-            display: flex;
-            gap: 4px;
-        }
-
-        .jl-icon-btn {
-            background: transparent;
-            border: 1px solid rgba(230, 126, 34, 0.35);
-            color: #a4b0be;
-            border-radius: 7px;
-            width: 26px;
-            height: 26px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .jl-icon-btn:hover {
-            color: #fff;
-            border-color: #f39c12;
-        }
-
-        .jaap-log-privacy-note {
-            font-size: 0.62rem;
-            color: #57606f;
-            text-align: center;
-            margin-top: 10px;
         }
 
         /* ---- Fixed gold corner menu button (quick jump links) ---- */
@@ -1564,36 +1432,6 @@
             </div>
 
             <button class="btn-reset" id="resetBtn" type="button">Reset Session</button>
-
-            <div class="jaap-log">
-                <h2 class="section-title" id="jaapLogTitle" style="font-size:1rem;">📅 Naam Jaap Log</h2>
-                <p class="seo-subtext" id="jaapLogSubtitle">Save your daily jaap count and track your practice over time</p>
-
-                <div class="util-field-row">
-                    <div class="util-field">
-                        <input type="date" id="jaapLogDate">
-                        <label id="jaapLogDateLabel">Date</label>
-                    </div>
-                    <div class="util-field">
-                        <input type="number" id="jaapLogCount" min="0" inputmode="numeric" placeholder="0">
-                        <label id="jaapLogCountLabel">Count</label>
-                    </div>
-                </div>
-                <div class="util-btn-row">
-                    <button type="button" class="util-btn secondary" id="jaapLogFillBtn"><span id="jaapLogFillLabel">Use Today's Tally</span></button>
-                    <button type="button" class="util-btn" id="jaapLogSaveBtn"><span id="jaapLogSaveLabel">Save Entry</span></button>
-                </div>
-                <p class="util-status" id="jaapLogStatus"></p>
-
-                <div class="jaap-log-summary" id="jaapLogSummary" style="display:none;"></div>
-                <div class="jaap-log-list" id="jaapLogList"></div>
-
-                <div class="util-btn-row" style="margin-top:12px;">
-                    <button type="button" class="util-btn secondary" id="jaapLogExportBtn">⬇ <span id="jaapLogExportLabel">Export to Excel/CSV</span></button>
-                </div>
-
-                <p class="jaap-log-privacy-note" id="jaapLogPrivacyNote">Saved only on this device/browser, not shared or uploaded anywhere.</p>
-            </div>
 
             <section class="seo-info">
                 <h2 id="howToTitle">How to Use This Jaap Mala Counter</h2>
@@ -2194,20 +2032,6 @@
                 completedMsg: 'Mala 108 Complete! 📿',
                 howToTitle: 'How to Use This Jaap Mala Counter',
                 howToText: 'Tap the button (or press the spacebar) once for each bead as you chant your mantra. The counter automatically tracks a full mala of 108 beads and resets for your next round, keeping a tally of how many malas you\u2019ve completed in this session. Works great for any mantra japa, including "Shri Swami Samarth" and "Radha Radha" chanting.',
-                jaapLogTitle: '📅 Naam Jaap Log',
-                jaapLogSubtitle: 'Save your daily jaap count and track your practice over time',
-                jaapLogDateLabel: 'Date',
-                jaapLogCountLabel: 'Count',
-                jaapLogFillLabel: "Use Today's Tally",
-                jaapLogSaveLabel: 'Save Entry',
-                jaapLogPrivacyNote: 'Saved only on this device/browser, not shared or uploaded anywhere.',
-                jaapLogTotalLabel: 'Total Jaap',
-                jaapLogDaysLabel: 'Days Logged',
-                jaapLogStreakLabel: 'Day Streak',
-                jaapLogEmptyMsg: 'No entries yet — add your first count above.',
-                jaapLogExportLabel: 'Export to Excel/CSV',
-                jaapLogImportPrompt: 'No entries to export yet',
-
                 footerText: 'Free Rudraksha Jaap Mala Counter \u2014 a simple digital tool for mantra japa and meditation practice.',
                 videosPageTitle: 'Satsang Videos',
                 premanandLabel: 'Premanand Ji Maharaj \u2014 Latest Video',
@@ -2258,20 +2082,6 @@
                 completedMsg: 'माळा १०८ पूर्ण! 📿',
                 howToTitle: 'ही जप माळ काउंटर कशी वापरावी',
                 howToText: 'प्रत्येक मण्यासाठी बटण दाबा (किंवा स्पेसबार दाबा) आणि तुमचा मंत्र जपत रहा. काउंटर आपोआप १०८ मण्यांची पूर्ण माळा मोजतो आणि पुढील फेरीसाठी रीसेट होतो, तसेच या सत्रात तुम्ही किती माळा पूर्ण केल्या याची नोंद ठेवतो. "श्री स्वामी समर्थ" आणि "राधा राधा" जपासाठीही उत्तम.',
-                jaapLogTitle: '📅 नाम जप नोंद',
-                jaapLogSubtitle: 'तुमची रोजची जप संख्या साठवा आणि तुमच्या साधनेचा मागोवा घ्या',
-                jaapLogDateLabel: 'तारीख',
-                jaapLogCountLabel: 'संख्या',
-                jaapLogFillLabel: 'आजची मोजणी वापरा',
-                jaapLogSaveLabel: 'नोंद जतन करा',
-                jaapLogPrivacyNote: 'फक्त या डिव्हाइस/ब्राउझरवर जतन केले जाते, कुठेही शेअर किंवा अपलोड होत नाही.',
-                jaapLogTotalLabel: 'एकूण जप',
-                jaapLogDaysLabel: 'नोंदवलेले दिवस',
-                jaapLogStreakLabel: 'सलग दिवस',
-                jaapLogEmptyMsg: 'अजून नोंदी नाहीत — वर तुमची पहिली संख्या जोडा.',
-                jaapLogExportLabel: 'एक्सेल/CSV मध्ये एक्सपोर्ट करा',
-                jaapLogImportPrompt: 'एक्सपोर्ट करण्यासाठी अजून नोंदी नाहीत',
-
                 footerText: 'मोफत रुद्राक्ष जप माळ काउंटर — मंत्र जप आणि ध्यान सरावासाठी एक साधे डिजिटल साधन.',
                 videosPageTitle: 'सत्संग व्हिडिओ',
                 premanandLabel: 'प्रेमानंद जी महाराज — नवीनतम व्हिडिओ',
@@ -2322,20 +2132,6 @@
                 completedMsg: 'माला 108 पूर्ण! 📿',
                 howToTitle: 'इस जाप माला काउंटर का उपयोग कैसे करें',
                 howToText: 'हर मनके के लिए बटन दबाएँ (या स्पेसबार दबाएँ) और अपना मंत्र जपते रहें। काउंटर स्वतः 108 मनकों की पूरी माला गिनता है और अगले दौर के लिए रीसेट हो जाता है, साथ ही यह भी बताता है कि आपने इस सत्र में कितनी मालाएँ पूरी कीं। "श्री स्वामी समर्थ" और "राधा राधा" जाप के लिए भी बेहतरीन।',
-                jaapLogTitle: '📅 नाम जाप लॉग',
-                jaapLogSubtitle: 'अपनी रोज़ की जाप संख्या सहेजें और अपने अभ्यास पर नज़र रखें',
-                jaapLogDateLabel: 'तारीख',
-                jaapLogCountLabel: 'संख्या',
-                jaapLogFillLabel: 'आज की गिनती उपयोग करें',
-                jaapLogSaveLabel: 'एंट्री सहेजें',
-                jaapLogPrivacyNote: 'केवल इस डिवाइस/ब्राउज़र में सहेजा जाता है, कहीं भी साझा या अपलोड नहीं होता।',
-                jaapLogTotalLabel: 'कुल जाप',
-                jaapLogDaysLabel: 'दर्ज दिन',
-                jaapLogStreakLabel: 'लगातार दिन',
-                jaapLogEmptyMsg: 'अभी कोई एंट्री नहीं — ऊपर अपनी पहली संख्या जोड़ें।',
-                jaapLogExportLabel: 'एक्सेल/CSV में एक्सपोर्ट करें',
-                jaapLogImportPrompt: 'एक्सपोर्ट करने के लिए अभी कोई एंट्री नहीं है',
-
                 footerText: 'मुफ्त रुद्राक्ष जाप माला काउंटर — मंत्र जाप और ध्यान अभ्यास के लिए एक सरल डिजिटल उपकरण।',
                 videosPageTitle: 'सत्संग वीडियो',
                 premanandLabel: 'प्रेमानंद जी महाराज — नवीनतम वीडियो',
@@ -2403,15 +2199,6 @@
             document.getElementById('malasLabel').textContent = t.malasLabel;
             document.getElementById('howToTitle').textContent = t.howToTitle;
             document.getElementById('howToText').textContent = t.howToText;
-            document.getElementById('jaapLogTitle').textContent = t.jaapLogTitle;
-            document.getElementById('jaapLogSubtitle').textContent = t.jaapLogSubtitle;
-            document.getElementById('jaapLogDateLabel').textContent = t.jaapLogDateLabel;
-            document.getElementById('jaapLogCountLabel').textContent = t.jaapLogCountLabel;
-            document.getElementById('jaapLogFillLabel').textContent = t.jaapLogFillLabel;
-            document.getElementById('jaapLogSaveLabel').textContent = t.jaapLogSaveLabel;
-            document.getElementById('jaapLogPrivacyNote').textContent = t.jaapLogPrivacyNote;
-            document.getElementById('jaapLogExportLabel').textContent = t.jaapLogExportLabel;
-            if (typeof window.renderJaapLog === 'function') window.renderJaapLog();
             document.getElementById('footerText').textContent = t.footerText;
             document.getElementById('videosPageTitle').textContent = t.videosPageTitle;
             document.getElementById('premanandLabel').textContent = t.premanandLabel;
@@ -3069,176 +2856,6 @@
                 update();
                 setInterval(update, 1000);
             })();
-        })();
-
-        // ================================================================
-        // Naam Jaap Log: manual date-wise entries, saved on this device
-        // ================================================================
-        (function () {
-            const STORAGE_KEY = 'jaapLogEntries';
-            const dateInput = document.getElementById('jaapLogDate');
-            const countInput = document.getElementById('jaapLogCount');
-            const saveBtn = document.getElementById('jaapLogSaveBtn');
-            const fillBtn = document.getElementById('jaapLogFillBtn');
-            const status = document.getElementById('jaapLogStatus');
-            const summaryEl = document.getElementById('jaapLogSummary');
-            const listEl = document.getElementById('jaapLogList');
-
-            function todayStr() {
-                const d = new Date();
-                const tzOffset = d.getTimezoneOffset() * 60000;
-                return new Date(d.getTime() - tzOffset).toISOString().slice(0, 10);
-            }
-
-            function loadEntries() {
-                try {
-                    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-                } catch (e) {
-                    return {};
-                }
-            }
-            function saveEntries(entries) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-            }
-
-            function formatDateDisplay(dateStr) {
-                const d = new Date(dateStr + 'T00:00:00');
-                return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
-            }
-
-            function render() {
-                const entries = loadEntries();
-                const dates = Object.keys(entries).sort().reverse();
-
-                if (dates.length === 0) {
-                    summaryEl.style.display = 'none';
-                    const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                    listEl.innerHTML = `<p class="jaap-log-empty">${t.jaapLogEmptyMsg}</p>`;
-                    return;
-                }
-
-                const totalCount = dates.reduce((sum, d) => sum + (entries[d] || 0), 0);
-                const totalDays = dates.length;
-
-                // Current streak: consecutive days ending today or yesterday
-                let streak = 0;
-                let cursor = new Date(todayStr() + 'T00:00:00');
-                while (true) {
-                    const key = new Date(cursor.getTime() - cursor.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-                    if (entries[key] !== undefined) {
-                        streak++;
-                        cursor.setDate(cursor.getDate() - 1);
-                    } else {
-                        break;
-                    }
-                }
-
-                summaryEl.style.display = 'flex';
-                const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                summaryEl.innerHTML = `
-                    <div class="jaap-log-stat"><span class="stat-num">${totalCount.toLocaleString()}</span><span class="stat-label">${t.jaapLogTotalLabel}</span></div>
-                    <div class="jaap-log-stat"><span class="stat-num">${totalDays}</span><span class="stat-label">${t.jaapLogDaysLabel}</span></div>
-                    <div class="jaap-log-stat"><span class="stat-num">${streak}</span><span class="stat-label">${t.jaapLogStreakLabel}</span></div>
-                `;
-
-                listEl.innerHTML = dates.map(d => `
-                    <div class="jaap-log-row" data-date="${d}">
-                        <span class="jl-date">${formatDateDisplay(d)}</span>
-                        <span class="jl-count">${entries[d].toLocaleString()}</span>
-                        <span class="jl-actions">
-                            <button type="button" class="jl-icon-btn jl-edit" data-date="${d}" aria-label="Edit">✎</button>
-                            <button type="button" class="jl-icon-btn jl-delete" data-date="${d}" aria-label="Delete">🗑</button>
-                        </span>
-                    </div>
-                `).join('');
-
-                listEl.querySelectorAll('.jl-edit').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const d = btn.dataset.date;
-                        dateInput.value = d;
-                        countInput.value = entries[d];
-                        countInput.focus();
-                        status.textContent = '';
-                    });
-                });
-                listEl.querySelectorAll('.jl-delete').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const d = btn.dataset.date;
-                        if (confirm(`Delete the entry for ${formatDateDisplay(d)}?`)) {
-                            const current = loadEntries();
-                            delete current[d];
-                            saveEntries(current);
-                            render();
-                        }
-                    });
-                });
-            }
-
-            dateInput.value = todayStr();
-            dateInput.max = todayStr();
-
-            fillBtn.addEventListener('click', () => {
-                const currentTally = document.getElementById('count');
-                countInput.value = currentTally ? currentTally.textContent.trim() : '0';
-            });
-
-            saveBtn.addEventListener('click', () => {
-                const d = dateInput.value;
-                const val = parseInt(countInput.value, 10);
-
-                if (!d) {
-                    status.textContent = 'Pick a date first';
-                    return;
-                }
-                if (isNaN(val) || val < 0) {
-                    status.textContent = 'Enter a valid count';
-                    return;
-                }
-
-                const entries = loadEntries();
-                entries[d] = val;
-                saveEntries(entries);
-                status.textContent = `Saved ${val.toLocaleString()} for ${formatDateDisplay(d)}`;
-                countInput.value = '';
-                render();
-
-                if (typeof gtag === 'function') {
-                    gtag('event', 'jaap_log_save');
-                }
-            });
-
-            // ---------------- Export to CSV (opens directly in Excel) ----------------
-            const exportBtn = document.getElementById('jaapLogExportBtn');
-            exportBtn.addEventListener('click', () => {
-                const entries = loadEntries();
-                const dates = Object.keys(entries).sort();
-
-                if (dates.length === 0) {
-                    const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
-                    status.textContent = t.jaapLogImportPrompt;
-                    return;
-                }
-
-                let csv = 'Date,Count\n';
-                dates.forEach(d => {
-                    csv += `${d},${entries[d]}\n`;
-                });
-
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `naam-jaap-log-${todayStr()}.csv`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                if (typeof gtag === 'function') gtag('event', 'jaap_log_export');
-            });
-
-            render();
-            window.renderJaapLog = render;
         })();
     </script>
 </body>
